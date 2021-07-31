@@ -1188,7 +1188,7 @@
 
   //#define MENU_ADDAUTOSTART               // Add a menu option to run auto#.g files
 
-  #define EVENT_GCODE_SD_ABORT "G28XY"      // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
+  #define EVENT_GCODE_SD_ABORT "M118 A1 action:cancel"      // G-code to run on SD Abort Print (e.g., "G28XY" or "G27")
 
   #if ENABLED(PRINTER_EVENT_LEDS)
     #define PE_LEDS_COMPLETED_TIME  (30*60) // (seconds) Time to keep the LED "done" color before restoring normal illumination
@@ -1917,7 +1917,7 @@
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-#define TX_BUFFER_SIZE 32
+#define TX_BUFFER_SIZE 128
 
 // Host Receive Buffer Size
 // Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
@@ -1925,7 +1925,7 @@
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
 //#define RX_BUFFER_SIZE 1024
 
-#if RX_BUFFER_SIZE >= 1024
+#if RX_BUFFER_SIZE >= 2048
   // Enable to have the controller send XON/XOFF control characters to
   // the host to signal the RX buffer is becoming full.
   //#define SERIAL_XON_XOFF
